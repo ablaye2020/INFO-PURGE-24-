@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Harmonie Studio | Créations numériques</title>
+  <!-- Google Fonts & Font Awesome (CDN propre) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fafcff;
+      color: #1a2c3e;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* container utilitaire */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* navigation moderne */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      z-index: 100;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #2b5f8a, #5f9bc2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #2c3e4e;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      color: #2b6a9f;
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      border: 1.5px solid #2b6a9f;
+      padding: 0.45rem 1.2rem;
+      border-radius: 40px;
+      color: #2b6a9f;
+      font-weight: 600;
+      transition: 0.25s;
+    }
+
+    .btn-outline-light:hover {
+      background: #2b6a9f;
+      color: white;
+    }
+
+    /* hero */
+    .hero {
+      padding: 5rem 0 6rem 0;
+      background: linear-gradient(145deg, #ffffff 0%, #f0f6fe 100%);
+    }
+
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-content {
+      flex: 1.2;
+    }
+
+    .hero-content h1 {
+      font-size: 3.3rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(to right, #1f4e6e, #3083b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #3a5468;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat span {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #1f5e87;
+    }
+
+    .hero-image {
+      flex: 0.9;
+      background: #d9e6f2;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+    }
+
+    .hero-image i {
+      font-size: 9rem;
+      color: #2b6a9f;
+      filter: drop-shadow(2px 8px 12px rgba(0,0,0,0.1));
+    }
+
+    /* buttons */
+    .btn-primary {
+      background: #1f5e87;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .btn-primary:hover {
+      background: #0e4465;
+      transform: translateY(-2px);
+    }
+
+    /* sections */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      color: #1e3b4f;
+    }
+
+    .section-sub {
+      text-align: center;
+      max-width: 700px;
+      margin: -1rem auto 3rem auto;
+      color: #4f6f86;
+    }
+
+    /* cartes services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.07);
+      transition: all 0.25s ease;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(31, 94, 135, 0.15);
+    }
+
+    .service-icon {
+      font-size: 2.8rem;
+      background: #eef4fc;
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      border-radius: 30px;
+      margin: 0 auto 1.2rem auto;
+      color: #22668d;
+    }
+
+    /* témoignages */
+    .testimonials {
+      background: #f1f7fd;
+    }
+
+    .testimonial-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .testimonial-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      max-width: 350px;
+      flex: 1;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+      transition: 0.2s;
+    }
+
+    .testimonial-card i.fa-quote-left {
+      color: #cbdde9;
+      font-size: 1.8rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .testimonial-text {
+      font-style: normal;
+      font-weight: 400;
+      margin: 1rem 0;
+      color: #2e4b62;
+    }
+
+    .client-name {
+      font-weight: 700;
+      margin-top: 1rem;
+      color: #1f5e87;
+    }
+
+    /* formulaire interactif */
+    .contact-form {
+      max-width: 700px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      border-radius: 60px;
+      border: 1px solid #d4e0e9;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: 0.2s;
+      background: #fefefe;
+    }
+
+    textarea {
+      border-radius: 28px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #3083b0;
+      box-shadow: 0 0 0 3px rgba(47, 128, 176, 0.2);
+    }
+
+    .btn-submit {
+      background: #1f5e87;
+      width: 100%;
+      border: none;
+      padding: 1rem;
+      border-radius: 60px;
+      font-weight: 700;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: #0e4465;
+    }
+
+    .form-feedback {
+      margin-top: 1rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* compteur dynamique */
+    .counter-section {
+      background: linear-gradient(115deg, #e9f2f9, #ffffff);
+      text-align: center;
+    }
+
+    .counter-display {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: #1f5e87;
+    }
+
+    /* footer */
+    footer {
+      background: #0d2c3b;
+      color: #cbdbe2;
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    .social-icons a {
+      color: #bdd4e2;
+      margin: 0 0.8rem;
+      font-size: 1.4rem;
+      transition: 0.2s;
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      color: white;
+      transform: scale(1.1);
+    }
+
+    /* animations */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(18px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+
+    .fade-up {
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @media (max-width: 800px) {
+      .nav-container {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .container {
+        padding: 0 1.3rem;
+      }
+      .hero-stats {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">✨ Harmonie Studio</div>
+      <div class="nav-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#services">Services</a>
+        <a href="#temoignages">Avis</a>
+        <a href="#contact">Contact</a>
+        <a href="#" id="demoInteractBtn" class="btn-outline-light"><i class="fas fa-magic"></i> Action live</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Section Hero / accueil -->
+    <section id="accueil" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1>Design & innovation <br>pour un impact durable</h1>
+          <p>Création de sites web, identité visuelle et expériences interactives. Donnez vie à vos projets avec élégance et performance.</p>
+          <button class="btn-primary" id="exploreBtn">Explorer nos créations →</button>
+          <div class="hero-stats">
+            <div class="stat"><span>120+</span><br>Projets livrés</div>
+            <div class="stat"><span>98%</span><br>Clients satisfaits</div>
+            <div class="stat"><span>24/7</span><br>Support dédié</div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <i class="fas fa-laptop-code"></i>
+          <p style="margin-top: 1rem; font-weight: 500;">Créativité sans limites</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section services dynamique -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Nos prestations créatives</h2>
+        <p class="section-sub">Des solutions sur mesure pour révéler votre potentiel numérique.</p>
+        <div class="services-grid" id="servicesGrid">
+          <!-- contenu généré via js mais aussi présent en fallback -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Section témoignages avec carrousel ou simple avis -->
+    <section id="temoignages" class="testimonials">
+      <div class="container">
+        <h2 class="section-title">Ils nous font confiance</h2>
+        <p class="section-sub">Retours authentiques de nos partenaires.</p>
+        <div class="testimonial-grid" id="testimonialGrid"></div>
+      </div>
+    </section>
+
+    <!-- Section compteur interactif JavaScript -->
+    <section class="counter-section">
+      <div class="container">
+        <h2 class="section-title" style="font-size:1.8rem;">✨ Interactions en temps réel</h2>
+        <p style="margin-bottom: 1rem;">Cliquez sur le bouton ci-dessous : incrémentez notre compteur de likes créatifs !</p>
+        <div class="counter-display" id="liveCounter">0</div>
+        <button id="incrementCounterBtn" class="btn-primary" style="margin-top: 0.7rem; background:#2a6d8f;"><i class="fas fa-heart"></i> J'aime l'expérience</button>
+      </div>
+    </section>
+
+    <!-- Formulaire de contact interactif -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Envoyez-nous un message</h2>
+        <p class="section-sub">Un projet ? Une collaboration ? Écrivons ensemble la première ligne de code.</p>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <input type="text" id="name" placeholder="Votre nom complet" required>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Adresse email" required>
+            </div>
+            <div class="form-group">
+              <textarea rows="3" id="message" placeholder="Dites-nous tout..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
+            <div class="form-feedback" id="formFeedback"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="social-icons">
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Github"><i class="fab fa-github"></i></a>
+      </div>
+      <p style="margin-top: 1.5rem;">© 2025 Harmonie Studio — Élégance numérique, code et passion.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ------------------------------
+    // 1. DONNÉES & CONTENU DYNAMIQUE
+    // ------------------------------
+    const servicesData = [
+      { icon: "fas fa-globe", title: "Websites sur mesure", desc: "Design responsive, animations fluides et performance SEO." },
+      { icon: "fas fa-palette", title: "Identité visuelle", desc: "Logos, chartes graphiques et direction artistique." },
+      { icon: "fas fa-chart-line", title: "Marketing digital", desc: "Stratégie de contenu, analytics et croissance." },
+      { icon: "fas fa-mobile-alt", title: "Applications web", desc: "SPA, interfaces riches, expérience utilisateur aboutie." }
+    ];
+
+    const testimonialsData = [
+      { quote: "Harmonie Studio a complètement transformé notre image de marque. Un professionnalisme rare !", author: "Sophie Mercier, CEO @ Lumina" },
+      { quote: "L'équipe est à l'écoute, créative et réactive. Le site génère +45% de leads en 3 mois.", author: "Thomas Bernard, Dir. commercial" },
+      { quote: "Je recommande les yeux fermés. Design moderne, code propre, et un suivi impeccable.", author: "Élodie Legrand, Fondatrice Atelier M" }
+    ];
+
+    function buildServices() {
+      const container = document.getElementById('servicesGrid');
+      if(!container) return;
+      container.innerHTML = '';
+      servicesData.forEach(service => {
+        const card = document.createElement('div');
+        card.className = 'service-card';
+        card.innerHTML = `
+          <div class="service-icon"><i class="${service.icon}"></i></div>
+          <h3 style="margin-bottom: 0.7rem;">${service.title}</h3>
+          <p style="color:#476b84;">${service.desc}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function buildTestimonials() {
+      const container = document.getElementById('testimonialGrid');
+      if(!container) return;
+      container.innerHTML = '';
+      testimonialsData.forEach(t => {
+        const card = document.createElement('div');
+        card.className = 'testimonial-card';
+        card.innerHTML = `
+          <i class="fas fa-quote-left"></i>
+          <p class="testimonial-text">“${t.quote}”</p>
+          <div class="client-name">— ${t.author}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ------------------------------
+    // 2. COMPTEUR INTERACTIF
+    // ------------------------------
+    let likeCount = 0;
+    const counterDisplay = document.getElementById('liveCounter');
+    const incrementBtn = document.getElementById('incrementCounterBtn');
+    
+    function updateCounterUI() {
+      if(counterDisplay) counterDisplay.innerText = likeCount;
+      // petite animation bonus : on peut stocker dans localStorage si on veut, mais c'est juste fun
+    }
+    
+    if(incrementBtn) {
+      incrementBtn.addEventListener('click', () => {
+        likeCount++;
+        updateCounterUI();
+        // petite notification subtile
+        const feedbackMsg = document.getElementById('formFeedback');
+        if(feedbackMsg && !feedbackMsg.innerText.includes('Merci')) {
+          // on peut montrer un toast rapide mais pas nécessaire
+        }
+        // créer un effet léger sur le bouton
+        incrementBtn.style.transform = 'scale(0.97)';
+        setTimeout(() => { if(incrementBtn) incrementBtn.style.transform = ''; }, 120);
+      });
+    }
+    
+    // ------------------------------
+    // 3. FORMULAIRE avec validation & feedback
+    // ------------------------------
+    const contactForm = document.getElementById('contactForm');
+    const feedbackDiv = document.getElementById('formFeedback');
+    
+    if(contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name')?.value.trim();
+        const email = document.getElementById('email')?.value.trim();
+        const message = document.getElementById('message')?.value.trim();
+        
+        if(!name || !email || !message) {
+          feedbackDiv.innerHTML = '<span style="color:#c0392b;">❌ Tous les champs sont requis.</span>';
+          return;
+        }
+        if(!email.includes('@') || !email.includes('.')) {
+          feedbackDiv.innerHTML = '<span style="color:#c0392b;">📧 Adresse email invalide.</span>';
+          return;
+        }
+        // Simulation d'envoi réussi
+        feedbackDiv.innerHTML = '<span style="color:#1f5e87;">✅ Merci ' + name + ' ! Votre message a bien été reçu. Nous vous répondrons sous 24h.</span>';
+        contactForm.reset();
+        // bonus : on nettoie le message après 4 secondes
+        setTimeout(() => {
+          if(feedbackDiv) feedbackDiv.innerHTML = '';
+        }, 4000);
+      });
+    }
+    
+    // ------------------------------
+    // 4. BOUTON EXPLORER / ALERTE MODERNE + démo action live
+    // ------------------------------
+    const exploreBtn = document.getElementById('exploreBtn');
+    if(exploreBtn) {
+      exploreBtn.addEventListener('click', () => {
+        // scroll vers services avec comportement smooth
+        const servicesSection = document.getElementById('services');
+        if(servicesSection) {
+          servicesSection.scrollIntoView({ behavior: 'smooth' });
+          // micro feedback
+          const tempMsg = document.createElement('div');
+          tempMsg.innerText = '✨ Découvrez nos services ci-dessous ✨';
+          tempMsg.style.position = 'fixed';
+          tempMsg.style.bottom = '20px';
+          tempMsg.style.left = '50%';
+          tempMsg.style.transform = 'translateX(-50%)';
+          tempMsg.style.backgroundColor = '#1f5e87';
+          tempMsg.style.color = 'white';
+          tempMsg.style.padding = '0.6rem 1.5rem';
+          tempMsg.style.borderRadius = '60px';
+          tempMsg.style.fontWeight = '500';
+          tempMsg.style.zIndex = '999';
+          tempMsg.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+          document.body.appendChild(tempMsg);
+          setTimeout(() => { tempMsg.remove(); }, 2000);
+        }
+      });
+    }
+    
+    // Bouton "Action live" dans la navbar => déclenche une alerte custom + incrémente le compteur en douceur
+    const demoBtn = document.getElementById('demoInteractBtn');
+    if(demoBtn) {
+      demoBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        // incrémenter aussi le compteur pour montrer l'interactivité globale
+        likeCount++;
+        updateCounterUI();
+        // notification élégante (toast)
+        const toast = document.createElement('div');
+        toast.innerHTML = '🎉 Interaction détectée ! +1 like créatif.';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '30px';
+        toast.style.right = '20px';
+        toast.style.backgroundColor = '#2c3e50';
+        toast.style.color = '#ecf0f1';
+        toast.style.padding = '12px 20px';
+        toast.style.borderRadius = '40px';
+        toast.style.fontSize = '0.9rem';
+        toast.style.fontWeight = '500';
+        toast.style.zIndex = '1000';
+        toast.style.boxShadow = '0 6px 14px rgba(0,0,0,0.1)';
+        toast.style.backdropFilter = 'blur(4px)';
+        document.body.appendChild(toast);
+        setTimeout(() => { toast.remove(); }, 2200);
+        
+        // option animation sur le compteur
+        if(counterDisplay) {
+          counterDisplay.style.transform = 'scale(1.1)';
+          setTimeout(() => { if(counterDisplay) counterDisplay.style.transform = ''; }, 200);
+        }
+      });
+    }
+    
+    // ------------------------------
+    // 5. initialisation de tout le contenu + animation sur les sections (fade-up)
+    // ------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      buildServices();
+      buildTestimonials();
+      updateCounterUI();
+      
+      // Appliquer un effet fade-up aux cartes et aux sections au scroll
+      const fadeElements = document.querySelectorAll('.service-card, .testimonial-card, .hero-content, .hero-image, .contact-form');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('fade-up');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      fadeElements.forEach(el => observer.observe(el));
+      
+      // petite initialisation pour que le compteur ne soit pas à zéro triste, on lui donne une valeur initiale de 42 (juste pour le style)
+      // mais on garde la liberté utilisateur
+      if(likeCount === 0 && counterDisplay && !localStorage.getItem('harmonie_count')) {
+        // optionnel: petite animation
+        likeCount = 24;  // valeur de départ sympathique
+        updateCounterUI();
+      } else {
+        updateCounterUI();
+      }
+      
+      // Ajout smooth scroll pour tous les ancres
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if(targetId === "#" || targetId === "") return;
+          const targetElem = document.querySelector(targetId);
+          if(targetElem) {
+            e.preventDefault();
+            targetElem.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+    
+    // ------------------------------
+    // Bonus: style additionnel pour le focus + rendre le site encore plus vivant
+    // ------------------------------
+    const style = document.createElement('style');
+    style.textContent = `
+      .fade-up {
+        opacity: 0;
+        animation: fadeUp 0.5s forwards;
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .service-card, .testimonial-card, .hero-content, .hero-image, .contact-form {
+        opacity: 0;
+      }
+      button, .btn-outline-light, .btn-primary, .btn-submit {
+        cursor: pointer;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
